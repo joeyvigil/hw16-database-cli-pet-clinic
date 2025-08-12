@@ -1,8 +1,14 @@
 #DONT FORGET TO IMPORT FUNCTIONS AFTER YOU MAKE THEM
+from bp_appointments import complete_appointment, create_appointment, reschedule_appointments, view_appointments
+from bp_auth import login, register
+from bp_owner import delete_user, update_user, view_owner
+from bp_pets import create_pet, delete_pet, update_pets, view_pets
+from models import Owners, session
 
 
 def welcome_menu():
     current_user = None
+    
     while True:
         print("""
 --------- Welcome to Pet Clinic --------
@@ -11,15 +17,15 @@ def welcome_menu():
 """)
         choice = input("select (1 or 2) or quit: ")
         if choice == '1':
-            #login function
-            #should set the current user on successful login
-            pass
+            current_user= login()
+            if current_user:
+                return current_user
 
         elif choice == '2':
-            #register function
-            #should set the current user on successful register
-            pass
-
+            current_user= register()
+            if current_user:
+                return current_user
+        
         elif choice == 'quit':
             return
         else:
@@ -34,15 +40,12 @@ def owner_menu(current_user):
     4.) Back""")
         choice = input("choose 1-3: ")
         if choice == '1':
-            #view profile funtion should display the current users info
-            pass
+            current_user = view_owner(current_user)
         elif choice == '2':
-            #update profile function, and returns the updated user
-            #on success, should set current_user to the user that is returned
-            pass
+            current_user = update_user(current_user)
         elif choice == '3':
-            #delete the current users account
-            pass
+            current_user = delete_user(current_user)
+            return None
         elif choice == '4':
             return #Goes back to main menu
         else:
@@ -58,17 +61,13 @@ def pets_menu(current_user):
 5.) Back""")
         choice = input("choose 1-5: ")
         if choice == '1':
-            #function that displays the current user's pets
-            pass
+            view_pets(current_user)
         elif choice == '2':
-            #function to create a new pet linked to the current user, add to db
-            pass
+            create_pet(current_user)
         elif choice == '3':
-            #function to update a particular pet 
-            pass
+            update_pets(current_user)
         elif choice == '4':
-            #function to delete a particuler pet
-            pass
+            delete_pet(current_user)
         elif choice == '5':
             return
         else:
@@ -79,24 +78,19 @@ def appointments_menu(current_user):
         print("""
 1.) schedule appointment
 2.) view appointments
-3.) reschdule appointment
+3.) reschedule appointment
 4.) Complete appointment
 5.) Back
 """)
         choice = input("choose 1-5: ")
         if choice == '1':
-            #Function to create a new appointment between one of the user's pets
-            #and one of the vets
-            pass
+            create_appointment(current_user)
         elif choice == '2':
-            #View current user's appointments
-            pass
+            view_appointments(current_user)
         elif choice == '3':
-            #Reschedule appointment (change the date)
-            pass
+            reschedule_appointments(current_user)
         elif choice == '4':
-            #Complete appointment (change status to complete)
-            pass
+            complete_appointment(current_user)
         elif choice =='5':
             return
 
@@ -104,7 +98,7 @@ def appointments_menu(current_user):
 def main():
     
     current_user = welcome_menu() 
-
+    # current_user = session.get(Owners,2)
     #After you test you login and register functions, it might be more efficient
     #to set current_user to a user in your db so you don't have to log in everytime
     #you want to test something.

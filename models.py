@@ -22,6 +22,18 @@ class Owners(Base):
     # Relationship to pets (one-to-many)
     pets: Mapped[list["Pets"]] = relationship("Pets", back_populates="owner")
     
+    def display(self):
+        print(f'''-------------- INFO -----------------
+User:\t\t{self.name}
+Email:\t\t{self.email}
+Password:\t{self.password}
+Phone:\t\t{self.phone}''')
+        
+    def display_pets(self):
+        print(f"------------------ {self.name}'s pets: ------------------")
+        for pet in self.pets:
+            print(f"Name: {pet.name} \t Species: {pet.species} \t Breed: {pet.breed} \t Age: {pet.age}")
+    
     
 
 
@@ -55,6 +67,9 @@ class Vets(Base):
     # Relationships
     appointments: Mapped[list["Appointments"]] = relationship("Appointments", back_populates="vet", )
     
+    def display(self):
+        print(f"Name: {self.name} \t Specialization: {self.specialization} \t email: {self.email}")
+    
     
 
 
@@ -72,6 +87,9 @@ class Appointments(Base):
     # Relationships
     pet: Mapped["Pets"] = relationship("Pets", back_populates="appointments")
     vet: Mapped["Vets"] = relationship("Vets", back_populates="appointments")
+    
+    def display(self):
+        print(f"id:{self.id}: \t{self.appointment_date} \t{self.vet.name} \t{self.notes} \t{self.status}")
     
 
 
