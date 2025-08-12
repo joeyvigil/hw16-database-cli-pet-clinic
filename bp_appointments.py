@@ -27,17 +27,21 @@ def create_appointment(current_user):
         vet_name = input("Enter Vet Name: ")
         vet = session.query(Vets).where(Vets.name == vet_name).first()
         if vet:
-            appointment_date = input(f"When would you like {pet.name} to see {vet.name}: (YYYY-MM-DD) ")
-            notes = input(f"Whats going on with {pet.name}? ")
-            date_obj = datetime.strptime(appointment_date,date_format)
-            new_apt = Appointments(pet_id= pet.id, veterinarian_id = vet.id, appointment_date =date_obj, notes= notes)
-            session.add(new_apt)
-            session.commit()
-            input(f"{pet.name} is all set to see {vet.name} on {appointment_date}")
+            try:
+                appointment_date = input(f"When would you like {pet.name} to see {vet.name}: (YYYY-MM-DD) ")
+                notes = input(f"Whats going on with {pet.name}? ")
+                date_obj = datetime.strptime(appointment_date,date_format)
+                new_apt = Appointments(pet_id= pet.id, veterinarian_id = vet.id, appointment_date =date_obj, notes= notes)
+                session.add(new_apt)
+                session.commit()
+                input(f"{pet.name} is all set to see {vet.name} on {appointment_date}")
+            except Exception as e:
+                print(e)
         else:
             input("invalid vet name")
     else:
         input("invalid pet name")
+    input("Press Enter")
         
 
 def reschedule_appointments(current_user):
@@ -46,13 +50,17 @@ def reschedule_appointments(current_user):
     choice = input("select appointment by id: ")
     app = session.get(Appointments,choice)
     if app and app.pet.owner_id == current_user.id:
-        print(" --------------------  -------------------- ")
-        app.display()
-        new_date = input("what is the new date? YYYY-MM-DD ? ")
-        new_date=datetime.strptime(new_date,date_format)
-        app.appointment_date=new_date
-        session.commit()
-        input(f"appointment successfully rescheduled to {new_date}")
+        try:
+            print(" --------------------  -------------------- ")
+            app.display()
+            new_date = input("what is the new date? YYYY-MM-DD ? ")
+            new_date=datetime.strptime(new_date,date_format)
+            app.appointment_date=new_date
+            session.commit()
+            input(f"appointment successfully rescheduled to {new_date}")
+        except Exception as e:
+            print(e)
+    input("Press Enter")
         
 
 def complete_appointment(current_user):
