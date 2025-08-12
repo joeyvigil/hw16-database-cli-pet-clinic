@@ -17,7 +17,7 @@ def welcome_menu():
     2.) Register
     3.) Exit
         """)
-        choice = input("Select (1, 2, or 3): ")
+        choice = input("Choose 1-3: ")
         if choice == '1':
             current_user= login()
             if current_user:
@@ -42,7 +42,7 @@ def owner_menu(current_user):
     3.) Delete Profile
     4.) Back
     """)
-        choice = input("choose 1-3: ")
+        choice = input("Choose 1-3: ")
         if choice == '1':
             current_user = view_owner(current_user)
         elif choice == '2':
@@ -65,7 +65,7 @@ def pets_menu(current_user):
     4.) Delete Pet
     5.) Back
         """)
-        choice = input("choose 1-5: ")
+        choice = input("Choose 1-5: ")
         if choice == '1':
             view_pets(current_user)
         elif choice == '2':
@@ -89,7 +89,7 @@ def appointments_menu(current_user):
     4.) Complete Appointment
     5.) Back
         """)
-        choice = input("choose 1-5: ")
+        choice = input("Choose 1-5: ")
         if choice == '1':
             create_appointment(current_user)
         elif choice == '2':
@@ -115,7 +115,7 @@ def main():
     3.) My Appointments
     4.) Exit 
             """)
-            choice = input("choose 1-4: ")
+            choice = input("Choose 1-4: ")
             if choice == '1':
                 owner_menu(current_user)
             elif choice == '2':
