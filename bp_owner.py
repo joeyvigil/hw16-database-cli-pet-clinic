@@ -5,7 +5,7 @@ from models import Owners, session
 def view_owner(current_user):
     os.system('cls||clear')
     current_user.display()
-    input()
+    input("Press Enter")
     return current_user
 
 
@@ -25,7 +25,7 @@ def update_user(current_user):
     session.commit()
     print("-------------------- updated info: --------------------")
     current_user.display()
-    input()
+    input("Press Enter")
     return current_user
 
 
@@ -39,4 +39,4 @@ def delete_user(current_user):
         return None
     else:
         print("return to menu")
-    input()
+    input("Press Enter")

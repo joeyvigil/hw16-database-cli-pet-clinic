@@ -5,7 +5,7 @@ from models import Pets, session, Owners
 def view_pets(current_user):
     os.system('cls||clear')
     current_user.display_pets()
-    a=input("")
+    a=input("Press Enter")
 
 
 def create_pet(current_user):
@@ -19,7 +19,7 @@ def create_pet(current_user):
     session.add(new_pet)
     session.commit()
     print("Pet profile successfully created")
-    input()
+    input("Press Enter")
 
 
 def update_pets(current_user):
@@ -45,7 +45,7 @@ def update_pets(current_user):
         print("Pet profile updated created")
     else:
         print("invalid pet selection")
-    input()
+    input("Press Enter")
         
 
 def delete_pet(current_user):
@@ -61,7 +61,7 @@ def delete_pet(current_user):
             print("successfully deleted pet")
     else:
         print("invalid pet option")
-    input()
+    input("Press Enter")
 
 
 
