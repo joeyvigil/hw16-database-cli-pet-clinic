@@ -89,7 +89,7 @@ class Appointments(Base):
     vet: Mapped["Vets"] = relationship("Vets", back_populates="appointments")
     
     def display(self):
-        print(f"id:{self.id}: \t{self.appointment_date} \t{self.vet.name} \t{self.notes} \t{self.status}")
+        print(f"id:{self.id} \t{self.appointment_date} \t{self.vet.name} \t{self.notes} \t{self.status}")
     
 
 
