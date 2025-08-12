@@ -23,16 +23,16 @@ class Owners(Base):
     pets: Mapped[list["Pets"]] = relationship("Pets", back_populates="owner")
     
     def display(self):
-        print(f'''-------------- INFO -----------------
+        print(f'''-------------------- INFO --------------------
 User:\t\t{self.name}
 Email:\t\t{self.email}
 Password:\t{self.password}
 Phone:\t\t{self.phone}''')
         
     def display_pets(self):
-        print(f"------------------ {self.name}'s pets: ------------------")
+        print(f"-------------------- {self.name}'s pets: --------------------")
         for pet in self.pets:
-            print(f"Name: {pet.name} \t Species: {pet.species} \t Breed: {pet.breed} \t Age: {pet.age}")
+            print(f"{pet.id}) {pet.name} \t Species: {pet.species} \t Breed: {pet.breed} \t Age: {pet.age}")
     
     
 
